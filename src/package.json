@@ -1,0 +1,14 @@
+{
+    "description": "A very small code editor.",
+    "main": "main.html",
+    "name": "Nate",
+    "version": "1.0",
+    "window": {
+        "height": 600,
+        "width": 650,
+        "show": false,
+        "title": "Nate",
+        "toolbar": false,
+        "icon": "icon.png"
+    }
+}

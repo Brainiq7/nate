@@ -57,7 +57,7 @@ module.exports = function(grunt) {
       node_modules: {
         expand: true,
         cwd: 'node_modules/',
-        src: ['node-watch/**/*'],
+        src: ['node-watch/**/*', 'osenv/**/*',],
         dest: '<%= config.dist %>/node_modules/'
       }
     },

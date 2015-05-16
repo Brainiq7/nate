@@ -1,4 +1,6 @@
+cache
 **/node_modules
 **/node_modules/**
 build/
+webkitbuilds/
 src/bower_components/

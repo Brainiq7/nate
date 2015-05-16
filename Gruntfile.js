@@ -3,24 +3,25 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     config: {
-      src:          './src',
-      dist:         './build',
-      webkitbuilds: './webkitbuilds'
+      src:          'src',
+      dist:         'build',
+      webkitbuilds: 'webkitbuilds/'
     },
     pkg: grunt.file.readJSON('package.json'),
 	
 	  nodewebkit: {
 	    options: {
 	        platforms: ['win', 'linux', 'osx'],
-	        buildDir: '<%= config.webkitbuilds %>', // Where the build version of my node-webkit app is saved
+	        buildDir: './webkitbuilds',
+          version: '0.12.1' // Where the build version of my node-webkit app is saved
 	    },
-	    src: ['<%= config.build %>/**/*'] // Your node-webkit app
+	    src: ['./build/**/*'] // Your node-webkit app
 	  },
     copy: {
       main: {
         expand: true,
         cwd: '<%= config.src %>/',
-        src: ['package.json', 'main.html'],
+        src: ['package.json', 'main.html', 'icon.png'],
         dest: '<%= config.dist %>/'
       },
       style: {

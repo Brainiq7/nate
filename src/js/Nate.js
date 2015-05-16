@@ -11,7 +11,7 @@
 //
  
 //
-// Class:       FunEditor
+// Class:       Nate
 //
 // Description:     This class contains the information and functionality
 //          of the Fun Editor. There should be only one instance
@@ -36,32 +36,32 @@
 //                  fs          The fs library object.
 //                  clipboard       The clipboard library object.
 //
-function FunEditor() {}
+function Nate() {}
  
-FunEditor.prototype.filesOpened = 0;
-FunEditor.prototype.saving = false;
-FunEditor.prototype.editor = null;
-FunEditor.prototype.menu = null;
-FunEditor.prototype.menuEdit = null;
-FunEditor.prototype.menuFile = null;
-FunEditor.prototype.menuEditMain = null;
-FunEditor.prototype.menuFileMain = null;
-FunEditor.prototype.nativeMenuBar = null;
-FunEditor.prototype.fileEntry = null;
-FunEditor.prototype.hasWriteAccess = false;
-FunEditor.prototype.origFileName = "";
-FunEditor.prototype.theme = {};
-FunEditor.prototype.lastCursor = { line: 0, col: 0 };
-FunEditor.prototype.watch = require("node-watch");
-FunEditor.prototype.gui = require("nw.gui");
-FunEditor.prototype.fs = require("fs");
-FunEditor.prototype.osenv = require("osenv");
-FunEditor.prototype.os = require("os");
+Nate.prototype.filesOpened = 0;
+Nate.prototype.saving = false;
+Nate.prototype.editor = null;
+Nate.prototype.menu = null;
+Nate.prototype.menuEdit = null;
+Nate.prototype.menuFile = null;
+Nate.prototype.menuEditMain = null;
+Nate.prototype.menuFileMain = null;
+Nate.prototype.nativeMenuBar = null;
+Nate.prototype.fileEntry = null;
+Nate.prototype.hasWriteAccess = false;
+Nate.prototype.origFileName = "";
+Nate.prototype.theme = {};
+Nate.prototype.lastCursor = { line: 0, col: 0 };
+Nate.prototype.watch = require("node-watch");
+Nate.prototype.gui = require("nw.gui");
+Nate.prototype.fs = require("fs");
+Nate.prototype.osenv = require("osenv");
+Nate.prototype.os = require("os");
  
-var FE = new FunEditor();
+var NT = new Nate();
  
-FunEditor.prototype.clipboard = FE.gui.Clipboard.get();
-FunEditor.prototype.win = FE.gui.Window.get();
+Nate.prototype.clipboard = NT.gui.Clipboard.get();
+Nate.prototype.win = NT.gui.Window.get();
  
 //
 // Function:    handleDocumentChange
@@ -75,7 +75,7 @@ FunEditor.prototype.win = FE.gui.Window.get();
 // Inputs:
 //          title   Title of the new document
 //
-FunEditor.prototype.handleDocumentChange = function(title) {
+Nate.prototype.handleDocumentChange = function(title) {
      //
      // Setup the default syntax highlighting mode.
      //
@@ -102,8 +102,8 @@ FunEditor.prototype.handleDocumentChange = function(title) {
             // The file changed. Load it into the editor. Needs implemented:
             // ask the user if they want the file to be reloaded.
             //
-            if(! FE.saving ) {
-                    FE.readFileIntoEditor(FE.fileEntry);
+            if(! NT.saving ) {
+                    NT.readFileIntoEditor(NT.fileEntry);
             }
         });
  
@@ -184,7 +184,7 @@ FunEditor.prototype.handleDocumentChange = function(title) {
 //
 // Description:     Set the cursor to the last stored state.
 //
-FunEditor.prototype.setCursorLast = function() {
+Nate.prototype.setCursorLast = function() {
     this.editor.moveCursorTo(this.lastCursor.line, this.lastCursor.col);
 }
  
@@ -196,7 +196,7 @@ FunEditor.prototype.setCursorLast = function() {
 //
 // Inputs:
 //
-FunEditor.prototype.newFile = function() {
+Nate.prototype.newFile = function() {
     this.fileEntry = null;
     this.hasWriteAccess = false;
     this.handleDocumentChange(null);
@@ -213,7 +213,7 @@ FunEditor.prototype.newFile = function() {
 // Inputs:
 //          theFileEntry    The path and file name
 //
-FunEditor.prototype.readFileIntoEditor = function(theFileEntry) {
+Nate.prototype.readFileIntoEditor = function(theFileEntry) {
     this.fs.readFile(theFileEntry, function(err, data) {
         if (err) {
             console.log("Error Reading file.");
@@ -222,22 +222,22 @@ FunEditor.prototype.readFileIntoEditor = function(theFileEntry) {
         //
         // Set the file properties.
         //
-        FE.handleDocumentChange(theFileEntry);
+        NT.handleDocumentChange(theFileEntry);
  
         //
         // Set the file contents.
         //
-        FE.editor.setValue(String(data));
+        NT.editor.setValue(String(data));
  
         //
         // Remove the selection.
         //
-        FE.editor.session.selection.clearSelection();
+        NT.editor.session.selection.clearSelection();
  
         //
         // Put the cursor to the last know position.
         //
-        FE.setCursorLast();
+        NT.setCursorLast();
     });
 };
  
@@ -250,7 +250,7 @@ FunEditor.prototype.readFileIntoEditor = function(theFileEntry) {
 // Inputs:
 //          theFileEntry    File to write the contents to.
 //
-FunEditor.prototype.writeEditorToFile = function(theFileEntry) {
+Nate.prototype.writeEditorToFile = function(theFileEntry) {
     var str = this.editor.getValue();
     this.fs.writeFile(theFileEntry, str, function(err) {
         if (err) {
@@ -266,7 +266,7 @@ FunEditor.prototype.writeEditorToFile = function(theFileEntry) {
 // Description:     This function takes the current selection and copies it
 //          to the clipboard.
 //
-FunEditor.prototype.copyFunction = function() {
+Nate.prototype.copyFunction = function() {
     this.clipboard.set(this.editor.getCopyText());
 };
  
@@ -276,7 +276,7 @@ FunEditor.prototype.copyFunction = function() {
 // Description:     This function cuts out the current selection and copies it
 //          to the clipboard.
 //
-FunEditor.prototype.cutFunction = function() {
+Nate.prototype.cutFunction = function() {
     this.clipboard.set(this.editor.getCopyText());
     this.editor.session.replace(this.editor.selection.getRange(),"");
 };
@@ -287,7 +287,7 @@ FunEditor.prototype.cutFunction = function() {
 // Description:     This function takes the clipboard and pastes it to the
 //                  current location.
 //
-FunEditor.prototype.pasteFunction = function() {
+Nate.prototype.pasteFunction = function() {
     this.editor.session.replace(this.editor.selection.getRange(), this.clipboard.get());
 };
  
@@ -297,7 +297,7 @@ FunEditor.prototype.pasteFunction = function() {
 // Description:     This function opens the select a file dialog for opening
 //          into the editor.
 //
-FunEditor.prototype.openFile = function() {
+Nate.prototype.openFile = function() {
     $("#openFile").trigger("click");
 };
  
@@ -307,7 +307,7 @@ FunEditor.prototype.openFile = function() {
 // Description:     This function saves to the currently open file or
 //          opens the save file dialog.
 //
-FunEditor.prototype.saveFile = function() {
+Nate.prototype.saveFile = function() {
     this.saving = true;
     if (this.fileEntry && this.hasWriteAccess) {
         this.writeEditorToFile(this.fileEntry);
@@ -325,45 +325,45 @@ FunEditor.prototype.saveFile = function() {
 //
 // Inputs:
 //
-FunEditor.prototype.initMenus = function() {
+Nate.prototype.initMenus = function() {
     this.menu = new this.gui.Menu();
     this.menuFile = new this.gui.Menu();
     this.menuEdit = new this.gui.Menu();
     this.menuFile.append(new this.gui.MenuItem({
         label: "New",
         click: function() {
-            FE.newFile();
+            NT.newFile();
         }
     }));
     this.menuFile.append(new this.gui.MenuItem({
         label: "Open",
         click: function() {
-            FE.openFile();
+            NT.openFile();
         }
     }));
     this.menuFile.append(new this.gui.MenuItem({
         label: "Save",
         click: function() {
-            FE.saveFile();
+            NT.saveFile();
         }
     }));
  
     this.menuEdit.append(new this.gui.MenuItem({
         label: "Copy",
         click: function() {
-            FE.copyFunction();
+            NT.copyFunction();
         }
     }));
      this.menuEdit.append(new this.gui.MenuItem({
           label: "Cut",
           click: function() {
-            FE.cutFunction();
+            NT.cutFunction();
           }
      }));
      this.menuEdit.append(new this.gui.MenuItem({
           label: "Paste",
           click: function() {
-            FE.pasteFunction();
+            NT.pasteFunction();
           }
      }));
  
@@ -372,49 +372,49 @@ FunEditor.prototype.initMenus = function() {
      this.menuFileMain.append(new this.gui.MenuItem({
           label: "New",
           click: function() {
-            FE.newFile();
+            NT.newFile();
           }
      }));
      this.menuFileMain.append(new this.gui.MenuItem({
           label: "Open",
           click: function() {
-            FE.openFile();
+            NT.openFile();
           }
      }));
      this.menuFileMain.append(new this.gui.MenuItem({
         label: "Save",
         click: function() {
-            FE.saveFile();
+            NT.saveFile();
         }
      }));
  
      this.menuEditMain.append(new this.gui.MenuItem({
         label: "Copy",
         click: function() {
-            FE.copyFunction();
+            NT.copyFunction();
         }
      }));
      this.menuEditMain.append(new this.gui.MenuItem({
         label: "Cut",
         click: function() {
-            FE.cutFunction();
+            NT.cutFunction();
         }
      }));
      this.menuEditMain.append(new this.gui.MenuItem({
         label: "Paste",
         click: function() {
-            FE.pasteFunction();
+            NT.pasteFunction();
         }
      }));
  
      this.menu.append(new this.gui.MenuItem({
         label: "File",
-        submenu: FE.menuFile
+        submenu: NT.menuFile
      }));
  
      this.menu.append(new this.gui.MenuItem({
         label: "Edit",
-        submenu: FE.menuEdit
+        submenu: NT.menuEdit
      }));
  
      //
@@ -433,12 +433,12 @@ FunEditor.prototype.initMenus = function() {
  
      this.nativeMenuBar.append(new this.gui.MenuItem({
         label: "File",
-        submenu: FE.menuFileMain
+        submenu: NT.menuFileMain
      }));
  
      this.nativeMenuBar.append(new this.gui.MenuItem({
         label: "Edit",
-        submenu: FE.menuEditMain
+        submenu: NT.menuEditMain
      }));
      this.win.menu = this.nativeMenuBar;
  
@@ -448,7 +448,7 @@ FunEditor.prototype.initMenus = function() {
     document.getElementById("editor").addEventListener("contextmenu",
         function(ev) {
             ev.preventDefault();
-            FE.menu.popup(ev.x, ev.y);
+            NT.menu.popup(ev.x, ev.y);
             return false;
         }
     );
@@ -466,7 +466,7 @@ FunEditor.prototype.initMenus = function() {
 //          theFileEntry        The path to the file selected.
 //
 onChosenFileToOpen = function(theFileEntry) {
-    FE.readFileIntoEditor(theFileEntry);
+    NT.readFileIntoEditor(theFileEntry);
 };
  
 //
@@ -480,7 +480,7 @@ onChosenFileToOpen = function(theFileEntry) {
 //          theFileEntry        The path to the file selected.
 //
 onChosenFileToSave = function(theFileEntry) {
-     FE.writeEditorToFile(theFileEntry);
+     NT.writeEditorToFile(theFileEntry);
 };
  
 //
@@ -502,7 +502,7 @@ onload = function() {
      //
      // Initialize the context menu.
      //
-     FE.initMenus();
+     NT.initMenus();
  
      //
      // Set the change function for saveFile and openFile.
@@ -514,60 +514,60 @@ onload = function() {
         onChosenFileToOpen($(this).val());
     });
  
-    FE.editor = ace.edit("editor");
-    FE.editor.$blockScrolling = Infinity;
-    FE.editor.setTheme("ace/theme/solarized_dark");
-    FE.editor.getSession().setMode("ace/mode/javascript");
-    FE.editor.setKeyboardHandler("ace/keyboard/vim");
-    FE.editor.setOption("enableEmmet", true);
-    FE.editor.setOption("selectionStyle","text");
-    FE.editor.setOption("highlightActiveLine",true);
-    FE.editor.setOption("cursorStyle","slim");
-    FE.editor.setOption("autoScrollEditorIntoView",true);
-    FE.editor.setOption("tabSize",4);
-    FE.editor.setOption("enableSnippets",true);
-    FE.editor.setOption("spellcheck",true);
-    FE.editor.setOption("wrap",true);
-    FE.editor.setOption("enableBasicAutocompletion",true);
-    FE.editor.setOption("enableLiveAutocompletion",false);
-    FE.editor.commands.addCommand({
+    NT.editor = ace.edit("editor");
+    NT.editor.$blockScrolling = Infinity;
+    NT.editor.setTheme("ace/theme/solarized_dark");
+    NT.editor.getSession().setMode("ace/mode/javascript");
+    NT.editor.setKeyboardHandler("ace/keyboard/vim");
+    NT.editor.setOption("enableEmmet", true);
+    NT.editor.setOption("selectionStyle","text");
+    NT.editor.setOption("highlightActiveLine",true);
+    NT.editor.setOption("cursorStyle","slim");
+    NT.editor.setOption("autoScrollEditorIntoView",true);
+    NT.editor.setOption("tabSize",4);
+    NT.editor.setOption("enableSnippets",true);
+    NT.editor.setOption("spellcheck",true);
+    NT.editor.setOption("wrap",true);
+    NT.editor.setOption("enableBasicAutocompletion",true);
+    NT.editor.setOption("enableLiveAutocompletion",false);
+    NT.editor.commands.addCommand({
         name: "myCopy",
         bindKey: {win: "Ctrl-C",  mac: "Command-C"},
         exec: function(editor) {
-            FE.copyFunction();
+            NT.copyFunction();
         },
         readOnly: false
     });
-    FE.editor.commands.addCommand({
+    NT.editor.commands.addCommand({
         name: "myPaste",
         bindKey: {win: "Ctrl-V",  mac: "Command-V"},
         exec: function(editor) {
-            FE.pasteFunction();
+            NT.pasteFunction();
         },
         readOnly: false
     });
-    FE.editor.commands.addCommand({
+    NT.editor.commands.addCommand({
         name: "myCut",
         bindKey: {win: "Ctrl-X",  mac: "Command-X"},
         exec: function(editor) {
-            FE.cutFunction();
+            NT.cutFunction();
         },
         readOnly: false
     });
-    FE.editor.commands.addCommand({
+    NT.editor.commands.addCommand({
         name: "mySave",
         bindKey: {win: "Ctrl-S",  mac: "Command-S"},
         exec: function(editor) {
-            FE.saveFile();
+            NT.saveFile();
         },
         readOnly: false
     });
  
     //
-    // Tie into the Vim mode save function. FE one took some digging to find!
+    // Tie into the Vim mode save function. NT one took some digging to find!
     //
-    FE.editor.state.cm.save = function() {
-        FE.saveFile();
+    NT.editor.state.cm.save = function() {
+        NT.saveFile();
     }
  
     //
@@ -577,25 +577,25 @@ onload = function() {
     // status line. Lastly, run function on window closing to remove
     // the current file from the open file list.
     //
-    FE.editor.on("changeStatus", function() {
+    NT.editor.on("changeStatus", function() {
         //
         // Get the current cursor to set the row and column.
         //
-        var cursor = FE.editor.selection.lead;
+        var cursor = NT.editor.selection.lead;
         document.getElementById("linenum").innerHTML = cursor.row + 1;
         document.getElementById("colnum").innerHTML = cursor.column + 1;
  
             //
                 // Save a copy of the cursor location.
                 //
-                FE.lastCursor.line = cursor.row;
-                FE.lastCursor.col = cursor.column;
+                NT.lastCursor.line = cursor.row;
+                NT.lastCursor.col = cursor.column;
  
         //
         // Get the text mode to set the Normal, Visual, or Insert vim
         // modes in the status line.
         //
-        var mode = FE.editor.keyBinding.getStatusText(editor);
+        var mode = NT.editor.keyBinding.getStatusText(editor);
         if (mode == "") {
             document.getElementById("editMode").innerHTML = "Normal";
         } else if (mode == "VISUAL") {
@@ -609,23 +609,23 @@ onload = function() {
     // Capture the Ace editor's copy and paste signals to get
     // or put to the system clipboard.
     //
-    FE.editor.on("copy",function(text) {
-        FE.clipboard.set(text);
+    NT.editor.on("copy",function(text) {
+        NT.clipboard.set(text);
     });
-    FE.editor.on("paste", function(e) {
-        e.text = FE.clipboard.get();
+    NT.editor.on("paste", function(e) {
+        e.text = NT.clipboard.get();
     });
  
     //
     // Capture the window close and make
     // sure the file has been saved.
     //
-     FE.win.on("close", function() {
+     NT.win.on("close", function() {
         //
         // Make sure the contents are saved.
         //
         if (this.fileEntry && this.hasWriteAccess) {
-            FE.saveFile();
+            NT.saveFile();
          }
  
         //
@@ -637,14 +637,14 @@ onload = function() {
      //
      // Setup for having a new empty file loaded.
      //
-     FE.newFile();
+     NT.newFile();
      onresize();
  
      //
      // Show the program and set the focus (focus does not work!).
      //
-     FE.win.show();
-     FE.win.focus();
+     NT.win.show();
+     NT.win.focus();
 };
  
 //

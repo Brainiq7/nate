@@ -69,6 +69,15 @@ module.exports = function(grunt) {
             cwd: 'build/',
             src: '**/*',
           },
+        ]
+      },
+      webkitbuilds: {
+        files: [
+          {
+            expand: true,
+            cwd: 'webkitbuilds/',
+            src: '**/*',
+          },
         ],
       }
     },

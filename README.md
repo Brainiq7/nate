@@ -1,4 +1,4 @@
-# Nate
+Nate
 =========
 
 Nate is a sofware code editor from NibbleIT.

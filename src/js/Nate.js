@@ -6,7 +6,7 @@
 //          NW.js, but I am finding that I really like
 //          the editor!
 //
-// Author:      Richard Guay (raguay@customct.com)
+// Author:      Precious Jahlom Agboado (jahlomp@nibbleitconsult.com)
 // License:         MIT
 //
  
@@ -530,6 +530,7 @@ onload = function() {
     NT.editor.setOption("wrap",true);
     NT.editor.setOption("enableBasicAutocompletion",true);
     NT.editor.setOption("enableLiveAutocompletion",false);
+    NT.editor.setOption("showPrintMargin", false)
     NT.editor.commands.addCommand({
         name: "myCopy",
         bindKey: {win: "Ctrl-C",  mac: "Command-C"},

@@ -316,17 +316,49 @@ Nate.prototype.saveFile = function() {
         $("#saveFile").trigger("click");
     }
     this.saving = false;
-
-  //   var chooser = document.querySelector('#saveFile');
-  //   chooser.addEventListener("change", function(evt) {
-  //     console.log(this.value);
-  //   }, false);
-
-  //   chooser.click();  
-  // }
-  // chooseFile('#saveFile');
 };
- 
+
+//
+// Function:    saveFileAs
+//
+// Description:     This function opens the save file dialog.
+//
+Nate.prototype.saveFileAs = function() {
+    this.saving = true;
+
+    $("#saveFile").trigger("click");
+    
+    this.saving = false;
+};
+
+//
+// Function:    newWindow
+//
+// Description:     This function opens a  new  window.
+//
+Nate.prototype.newWindow = function() {
+    return;
+};
+
+//
+// Function:    closeWindow
+//
+// Description:     This function closes the current focused window.
+//
+Nate.prototype.closeWindow = function() {
+   this.win.close(true);
+};
+
+//
+// Function:    closeAllWindows
+//
+// Description:     This function closes all opened Nate editors.
+//
+Nate.prototype.closeAllWindows = function() {
+    this.win.close(true);
+};
+
+
 //
 // Function:    initMenus
 //
@@ -359,14 +391,10 @@ Nate.prototype.initMenus = function() {
     }));
     this.menuFileMain.append(new this.gui.MenuItem({
         label: "Open",
+        key: "o",
+        modifiers: "ctrl",
         click: function() {
             NT.openFile();
-        }
-    }));
-    this.menuFileMain.append(new this.gui.MenuItem({
-        label: "New Window",
-        click: function() {
-            return;
         }
     }));
     this.menuFileMain.append(new this.gui.MenuItem({ 
@@ -374,29 +402,46 @@ Nate.prototype.initMenus = function() {
     }));    
     this.menuFileMain.append(new this.gui.MenuItem({
         label: "Save",
+        key: "s",
+        modifiers: "ctrl",
         click: function() {
             NT.saveFile();
         }
     }));
     this.menuFileMain.append(new this.gui.MenuItem({
         label: "Save As",
+        key: "s",
+        modifiers: "ctrl-shift",
         click: function() {
-            return
+            NT.saveFileAs();
+        }
+    }));
+    this.menuFileMain.append(new this.gui.MenuItem({ 
+        type: 'separator' 
+    }));
+    this.menuFileMain.append(new this.gui.MenuItem({
+        label: "New Window",
+        key: "n",
+        modifiers: "ctrl-shift",
+        click: function() {
+            NT.newWindow();
         }
     }));
     this.menuFileMain.append(new this.gui.MenuItem({
-        label: "Save All",
+        label: "Close Window",
+        key: "w",
+        modifiers: "ctrl-shift",
         click: function() {
-            return
+            NT.closeWindow();
         }
     }));
     this.menuFileMain.append(new this.gui.MenuItem({ 
         type: 'separator' 
     })); 
     this.menuFileMain.append(new this.gui.MenuItem({
-        label: "Close",
+        label: "Exit",
         click: function() {
-            return
+             NT.closeAllWindows();
         }
     }));
 
@@ -709,14 +754,7 @@ onload = function() {
         },
         readOnly: false
     });
-    NT.editor.commands.addCommand({
-        name: "mySave",
-        bindKey: {win: "Ctrl-S",  mac: "Command-S"},
-        exec: function(editor) {
-            NT.saveFile();
-        },
-        readOnly: false
-    });
+    
  
     //
     // Tie into the Vim mode save function. NT one took some digging to find!

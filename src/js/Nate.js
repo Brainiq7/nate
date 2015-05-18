@@ -199,7 +199,7 @@ Nate.prototype.setCursorLast = function() {
 //
 Nate.prototype.newFile = function() {
     this.fileEntry = null;
-    this.hasWriteAccess = false;
+    this.hasWriteAccess = true;
     this.handleDocumentChange(null);
     this.editor.setValue("");
 };
@@ -316,6 +316,15 @@ Nate.prototype.saveFile = function() {
         $("#saveFile").trigger("click");
     }
     this.saving = false;
+
+  //   var chooser = document.querySelector('#saveFile');
+  //   chooser.addEventListener("change", function(evt) {
+  //     console.log(this.value);
+  //   }, false);
+
+  //   chooser.click();  
+  // }
+  // chooseFile('#saveFile');
 };
  
 //
@@ -667,7 +676,7 @@ onload = function() {
     NT.editor.setOption("enableEmmet", true);
     NT.editor.setOption("selectionStyle","text");
     NT.editor.setOption("highlightActiveLine",true);
-    NT.editor.setOption("cursorStyle","slim");
+    NT.editor.setOption("cursorStyle","smooth");
     NT.editor.setOption("autoScrollEditorIntoView",true);
     NT.editor.setOption("tabSize",4);
     NT.editor.setOption("enableSnippets",true);
@@ -675,7 +684,7 @@ onload = function() {
     NT.editor.setOption("wrap",true);
     NT.editor.setOption("enableBasicAutocompletion",true);
     NT.editor.setOption("enableLiveAutocompletion",false);
-    NT.editor.setOption("showPrintMargin", false)
+    NT.editor.setOption("showPrintMargin",false)
     NT.editor.commands.addCommand({
         name: "myCopy",
         bindKey: {win: "Ctrl-C",  mac: "Command-C"},

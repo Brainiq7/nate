@@ -85,10 +85,10 @@ module.exports = function(grunt) {
       data: {
         files: [
           'node_modules/',
-          '<%= config.src %>/**/*'
-            
+          '<%= config.src %>/**/*',
+          '<%= config.src %>/js/**/*.js'            
         ],
-        tasks: ['default']
+        tasks: ['build', 'release', 'watch']
       }
     }
   });

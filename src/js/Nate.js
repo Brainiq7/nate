@@ -21,11 +21,12 @@
 //                  editor      Keeps the Editor object
 //                  menu        keeps the menu object for the pop-up
 //                              menu.
-//                  menuEdit        Edit menu for the popup menu
 //                  menuEditMain    The Edit menu for the main menu
-//                  menuFile        File menu for the popup menu
-//                  menuFileMain    File menu for the main menu
-//                  nativeMenuBar   The menu bar for OSX Main menu
+//                  menuFileMain    The File menu for the main menu
+//                  menuViewMain    The View menu for the main menu
+//                  menuGotoMain    The Goto menu for the main menu
+//                  menuHelpMain    The Help menu for the main menu
+//                  nativeMenuBar   The menu bar for OS Main menu
 //                  hasWriteAccess  boolean for if the file is
 //                                  writable or not.
 //                  origFileName    Last file name opened.
@@ -42,10 +43,10 @@ Nate.prototype.filesOpened = 0;
 Nate.prototype.saving = false;
 Nate.prototype.editor = null;
 Nate.prototype.menu = null;
-Nate.prototype.menuEdit = null;
-Nate.prototype.menuFile = null;
 Nate.prototype.menuEditMain = null;
-Nate.prototype.menuFileMain = null;
+Nate.prototype.menuViewMain = null;
+Nate.prototype.menuGotoMain = null;
+Nate.prototype.menuHelpMain = null;
 Nate.prototype.nativeMenuBar = null;
 Nate.prototype.fileEntry = null;
 Nate.prototype.hasWriteAccess = false;
@@ -326,132 +327,276 @@ Nate.prototype.saveFile = function() {
 // Inputs:
 //
 Nate.prototype.initMenus = function() {
+
+    // Initialize Menubar
     this.menu = new this.gui.Menu();
-    this.menuFile = new this.gui.Menu();
-    this.menuEdit = new this.gui.Menu();
-    this.menuFile.append(new this.gui.MenuItem({
-        label: "New",
+
+    // Initialize Native Menus used by Mac
+    this.menuFileMain = new this.gui.Menu();
+    this.menuEditMain = new this.gui.Menu();
+    this.menuViewMain = new this.gui.Menu();
+    this.menuGotoMain = new this.gui.Menu();
+    this.menuHelpMain = new this.gui.Menu();
+
+
+    //  Submenus for File Menu
+    this.menuFileMain.append(new this.gui.MenuItem({
+        label: "New File",
+        key: "n",
+        modifiers: "ctrl",
         click: function() {
             NT.newFile();
         }
     }));
-    this.menuFile.append(new this.gui.MenuItem({
+    this.menuFileMain.append(new this.gui.MenuItem({
         label: "Open",
         click: function() {
             NT.openFile();
         }
     }));
-    this.menuFile.append(new this.gui.MenuItem({
+    this.menuFileMain.append(new this.gui.MenuItem({
+        label: "New Window",
+        click: function() {
+            return;
+        }
+    }));
+    this.menuFileMain.append(new this.gui.MenuItem({ 
+        type: 'separator' 
+    }));    
+    this.menuFileMain.append(new this.gui.MenuItem({
         label: "Save",
         click: function() {
             NT.saveFile();
         }
     }));
- 
-    this.menuEdit.append(new this.gui.MenuItem({
-        label: "Copy",
+    this.menuFileMain.append(new this.gui.MenuItem({
+        label: "Save As",
         click: function() {
-            NT.copyFunction();
+            return
         }
     }));
-     this.menuEdit.append(new this.gui.MenuItem({
-          label: "Cut",
-          click: function() {
-            NT.cutFunction();
-          }
-     }));
-     this.menuEdit.append(new this.gui.MenuItem({
-          label: "Paste",
-          click: function() {
-            NT.pasteFunction();
-          }
-     }));
- 
-     this.menuFileMain = new this.gui.Menu();
-     this.menuEditMain = new this.gui.Menu();
-     this.menuFileMain.append(new this.gui.MenuItem({
-          label: "New",
-          click: function() {
-            NT.newFile();
-          }
-     }));
-     this.menuFileMain.append(new this.gui.MenuItem({
-          label: "Open",
-          click: function() {
-            NT.openFile();
-          }
-     }));
-     this.menuFileMain.append(new this.gui.MenuItem({
-        label: "Save",
+    this.menuFileMain.append(new this.gui.MenuItem({
+        label: "Save All",
         click: function() {
-            NT.saveFile();
+            return
         }
-     }));
- 
-     this.menuEditMain.append(new this.gui.MenuItem({
+    }));
+    this.menuFileMain.append(new this.gui.MenuItem({ 
+        type: 'separator' 
+    })); 
+    this.menuFileMain.append(new this.gui.MenuItem({
+        label: "Close",
+        click: function() {
+            return
+        }
+    }));
+
+    //  Submenus for Edit Menu
+    this.menuEditMain.append(new this.gui.MenuItem({
+        label: "Undo",
+        click: function() {
+            return;
+        }
+    }));
+    this.menuEditMain.append(new this.gui.MenuItem({
+        label: "Redo",
+        click: function() {
+            return;
+        }
+    }));
+    this.menuEditMain.append(new this.gui.MenuItem({ 
+        type: 'separator' 
+    }));
+    this.menuEditMain.append(new this.gui.MenuItem({
         label: "Copy",
         click: function() {
             NT.copyFunction();
         }
-     }));
-     this.menuEditMain.append(new this.gui.MenuItem({
+    }));    
+    this.menuEditMain.append(new this.gui.MenuItem({
         label: "Cut",
         click: function() {
             NT.cutFunction();
         }
-     }));
-     this.menuEditMain.append(new this.gui.MenuItem({
+    }));
+    this.menuEditMain.append(new this.gui.MenuItem({
         label: "Paste",
         click: function() {
             NT.pasteFunction();
         }
-     }));
- 
-     this.menu.append(new this.gui.MenuItem({
-        label: "File",
-        submenu: NT.menuFile
-     }));
- 
-     this.menu.append(new this.gui.MenuItem({
-        label: "Edit",
-        submenu: NT.menuEdit
-     }));
- 
+    }));
+    this.menuEditMain.append(new this.gui.MenuItem({
+        label: "Select All",
+        click: function() {
+            return;
+        }
+    }));
+
+    //  Submenus for View Menu
+    this.menuViewMain.append(new this.gui.MenuItem({
+        label: "Toggle Full Screen",
+        click: function() {
+            return;
+        }
+    }));
+    this.menuViewMain.append(new this.gui.MenuItem({ 
+        type: 'separator' 
+    }));
+    this.menuViewMain.append(new this.gui.MenuItem({
+        label: "Zoom in",
+        click: function() {
+            return;
+        }
+    }));
+    this.menuViewMain.append(new this.gui.MenuItem({
+        label: "Zoom out",
+        click: function() {
+            return;
+        }
+    }));
+    this.menuViewMain.append(new this.gui.MenuItem({ 
+        type: 'separator' 
+    }));
+    this.menuViewMain.append(new this.gui.MenuItem({
+        label: "Theme",
+        click: function() {
+            return;
+        }
+    }));
+
+    // Submenus for Goto Menu
+    this.menuGotoMain.append(new this.gui.MenuItem({
+        label: "Back",
+        click: function() {
+            return;
+        }
+    }));
+    this.menuGotoMain.append(new this.gui.MenuItem({
+        label: "Forward",
+        click: function() {
+            return;
+        }
+    }));
+    this.menuGotoMain.append(new this.gui.MenuItem({
+        label: "Navigate History",
+        click: function() {
+            return;
+        }
+    }));
+    this.menuGotoMain.append(new this.gui.MenuItem({ 
+        type: 'separator' 
+    }));
+    this.menuGotoMain.append(new this.gui.MenuItem({
+        label: "Go to File",
+        click: function() {
+            return;
+        }
+    }));
+
+    //  Submenus for Help Menu
+    this.menuHelpMain.append(new this.gui.MenuItem({
+        label: "Documentation",
+        click: function() {
+            return;
+        }
+    }));
+    this.menuHelpMain.append(new this.gui.MenuItem({ 
+        type: 'separator' 
+    }));
+    this.menuHelpMain.append(new this.gui.MenuItem({
+        label: "Join us on Twitter",
+        click: function() {
+            return;
+        }
+    }));
+    this.menuHelpMain.append(new this.gui.MenuItem({
+        label: "Feature Reqest",
+        click: function() {
+            return;
+        }
+    }));
+    this.menuHelpMain.append(new this.gui.MenuItem({
+        label: "Report Issues",
+        click: function() {
+            return;
+        }
+    }));
+    this.menuHelpMain.append(new this.gui.MenuItem({ 
+        type: 'separator' 
+    }));
+    this.menuHelpMain.append(new this.gui.MenuItem({
+        label: "Check for Updates",
+        click: function() {
+            return;
+        }
+    }));
+    this.menuHelpMain.append(new this.gui.MenuItem({
+        label: "Changelog",
+        click: function() {
+            return
+        }
+    }));
+    this.menuHelpMain.append(new this.gui.MenuItem({
+        label: "About",
+        click: function() {
+            return;
+        }
+    }));
+
      //
-     // Create the main Mac menu also.
+     // Create the main menu.
      //
      this.nativeMenuBar = new this.gui.Menu({
         type: "menubar"
      });
  
-     if(this.os.platform()  == "darwin") {
-         this.nativeMenuBar.createMacBuiltin("Fun Editor", {
+    if(this.os.platform()  == "darwin") {
+        this.nativeMenuBar.createMacBuiltin("Nate Editor", {
             hideEdit: true,
             hideWindow: true
-         });
+        });
     }
  
-     this.nativeMenuBar.append(new this.gui.MenuItem({
+
+    // Append Menus to menubar
+    this.nativeMenuBar.append(new this.gui.MenuItem({
         label: "File",
         submenu: NT.menuFileMain
-     }));
+    }));
  
-     this.nativeMenuBar.append(new this.gui.MenuItem({
+    this.nativeMenuBar.append(new this.gui.MenuItem({
         label: "Edit",
         submenu: NT.menuEditMain
-     }));
-     this.win.menu = this.nativeMenuBar;
+    }));
+
+    this.nativeMenuBar.append(new this.gui.MenuItem({
+        label: "View",
+        submenu: NT.menuViewMain
+    }));
+
+    this.nativeMenuBar.append(new this.gui.MenuItem({
+        label: "Goto",
+        submenu: NT.menuGotoMain
+    }));
+
+    this.nativeMenuBar.append(new this.gui.MenuItem({
+        label: "Help",
+        submenu: NT.menuHelpMain
+    }));
+
+    // Adding the menubar to the window's menu
+    this.win.menu = this.nativeMenuBar;
  
     //
     // Add the menu to the contextmenu event listener.
     //
-    document.getElementById("editor").addEventListener("contextmenu",
-        function(ev) {
-            ev.preventDefault();
-            NT.menu.popup(ev.x, ev.y);
-            return false;
-        }
-    );
+    // document.getElementById("editor").addEventListener("contextmenu",
+    //     function(ev) {
+    //         ev.preventDefault();
+    //         NT.menu.popup(ev.x, ev.y);
+    //         return false;
+    //     }
+    // );
 };
  
 //
@@ -499,10 +644,10 @@ onChosenFileToSave = function(theFileEntry) {
 //
 onload = function() {
  
-     //
-     // Initialize the context menu.
-     //
-     NT.initMenus();
+    //
+    // Initialize the context menu.
+    //
+    NT.initMenus();
  
      //
      // Set the change function for saveFile and openFile.

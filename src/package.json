@@ -2,10 +2,10 @@
     "description": "A very small code editor.",
     "main": "main.html",
     "name": "Nate",
-    "version": "1.0",
+    "version": "0.0.1",
     "window": {
         "height": 600,
-        "width": 650,
+        "width": 800,
         "show": false,
         "title": "Nate",
         "toolbar": false,

@@ -3,4 +3,5 @@ cache
 **/node_modules/**
 build/
 webkitbuilds/
-src/bower_components/
+src/lib/
+!src/lib/codemirror

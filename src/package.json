@@ -4,8 +4,9 @@
 	"main": "ui/main.html",
 	"single-instance": false,
 	"version": "0.0.1",
-	"window": {
-        "toolbar": false,
-        "icon": "icon.png"
-    }
+    "window": {
+	    "show": false,
+	    "title": "Nate Editor",
+	    "toolbar": false
+  	}
 }

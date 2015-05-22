@@ -3,5 +3,5 @@ cache
 **/node_modules/**
 build/
 webkitbuilds/
-src/lib/
+src/lib
 !src/lib/codemirror

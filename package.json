@@ -9,8 +9,6 @@
   "author": "Precious Jahlom Agboado",
   "license": "MIT",
   "dependencies": {
-    "node-watch": "^0.3.4",
-    "osenv": "^0.1.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

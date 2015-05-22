@@ -1,13 +1,10 @@
 {
-    "description": "A very small code editor.",
-    "main": "main.html",
-    "name": "Nate",
-    "version": "0.0.1",
-    "window": {
-        "height": 600,
-        "width": 800,
-        "show": false,
-        "title": "Nate",
+	"name": "Nate Editor",
+	"description": "Nate Editor is a sofware code editor from NibbleIT.",
+	"main": "ui/main.html",
+	"single-instance": false,
+	"version": "0.0.1",
+	"window": {
         "toolbar": false,
         "icon": "icon.png"
     }

@@ -1,0 +1,170 @@
+@StatusLineEditMode:    rgb(98, 105, 255);
+@StatusLineTitle:       rgb(98, 247, 255);
+@StatusLineMode:        rgb(98, 255, 149);
+@StatusLineLineNum:     rgb(224, 217, 87);
+@StatusLineColNum:      rgb(87, 212, 224);
+@StatusLineBackground:  white;
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.CodeMirror {
+  margin: 0;
+  padding: 0;
+  height: 100%!important;
+}
+
+.CodeMirror-scroll {
+  height: auto;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.cm-s-ambiance .CodeMirror-linenumber {
+  color: #fff!important;
+}
+
+#editor {
+  position: absolute;
+  top: 0px;
+  bottom: 25px;
+  left: 0;
+  right: 0;
+  background: #262626;
+}
+
+.info {
+  position: absolute;
+  display: inline;
+  bottom: 0px;
+  font-family: monospace;
+  white-space: nowrap;
+  bottom: 0;
+  background: @StatusLineBackground;
+  padding: 0px;
+  height: 25px;
+  left: 0;
+  width: 100%;
+}
+ 
+.statuslineitem {
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-right: 3px;
+    padding-left: 0px;
+    border: 0px;
+    float: left;
+}
+ 
+.arrow-right-editMode {
+    width: 0;
+    height: 0;
+    border-top: 13px solid transparent;
+    border-bottom: 13px solid transparent;
+ 
+    border-left: 13px solid @StatusLineEditMode;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 0px;
+}
+ 
+.arrow-right-title {
+    width: 0;
+    height: 0;
+    border-top: 13px solid transparent;
+    border-bottom: 13px solid transparent;
+ 
+    border-left: 13px solid @StatusLineTitle;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 0px;
+}
+ 
+.arrow-right-mode {
+    width: 0;
+    height: 0;
+    border-top: 13px solid transparent;
+    border-bottom: 13px solid transparent;
+ 
+    border-left: 13px solid @StatusLineMode;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 0px;
+}
+ 
+.arrow-right-linenum {
+    width: 0;
+    height: 0;
+    border-top: 13px solid transparent;
+    border-bottom: 13px solid transparent;
+ 
+    border-left: 13px solid @StatusLineLineNum;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 0px;
+}
+ 
+.arrow-right-colnum {
+    width: 0;
+    height: 0;
+    border-top: 13px solid transparent;
+    border-bottom: 13px solid transparent;
+ 
+    border-left: 13px solid @StatusLineColNum;
+    margin: 0px;
+    padding: 0px;
+}
+ 
+#editMode {
+    background: @StatusLineEditMode;
+    padding-left: 5px;
+}
+ 
+#title {
+    background: @StatusLineTitle;
+    padding-left: 5px;
+}
+ 
+#mode {
+    background: @StatusLineMode;
+    padding-left: 5px;
+}
+ 
+#linenum {
+    background: @StatusLineLineNum;
+    padding-left: 5px;
+}
+ 
+#colnum {
+    background: @StatusLineColNum;
+    padding-left: 5px;
+}
+ 
+#editMode {
+    background: @StatusLineEditMode;
+    padding-left: 5px;
+}
+ 
+.title {
+    background: @StatusLineTitle;
+}
+ 
+.mode {
+    background: @StatusLineMode;
+}
+ 
+.linenum {
+    background: @StatusLineLineNum;
+}
+ 
+.colnum {
+    background: @StatusLineColNum;
+}

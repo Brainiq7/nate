@@ -1,12 +1,17 @@
 {
-	"name": "Nate Editor",
-	"description": "Nate Editor is a sofware code editor from NibbleIT.",
-	"main": "ui/main.html",
-	"single-instance": false,
-	"version": "0.0.1",
-    "window": {
-	    "show": false,
-	    "title": "Nate Editor",
-	    "toolbar": false
-  	}
+  "name": "Nate Editor",
+  "description": "Nate Editor is a sofware code editor from NibbleIT.",
+  "main": "main.html",
+  "single-instance": true,
+  "version": "0.0.1",
+  "window": {
+      "width": 1200,
+      "height": 800,
+      "position": "center",
+      "min_width": 800,
+      "min_height": 600,
+      "show": false,
+      "title": "Nate Editor",
+      "toolbar": true
+  }
 }

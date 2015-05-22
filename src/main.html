@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Nate Editor</title>
+		<script type="text/javascript" src="lib/zepto/zepto.min.js"></script>
+		<script type="text/javascript" src="js/nate.js"></script>
+
+		<link rel="stylesheet/less" type="text/css" href="less/style.less">
+		<script type="text/javascript" src="lib/less/dist/less.min.js"></script>
+
+		<script src="lib/codemirror/lib/codemirror.js"></script>
+		<script src="lib/codemirror/mode/css/css.js"></script>
+		<script src="lib/codemirror/mode/xml/xml.js"></script>
+		<script src="lib/codemirror/mode/javascript/javascript.js"></script>
+		<script src="lib/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+
+		<link rel="stylesheet" href="lib/codemirror/lib/codemirror.css">
+		<link rel="stylesheet" href="lib/codemirror/theme/ambiance.css">
+	</head>
+	<body>
+		<div id="editor"></div>
+
+		<div class="info">
+            <span id="editMode" class="statuslineitem">Normal</span>
+            <span class="title statuslineitem">
+            <span class="arrow-right-editMode statuslineitem"></span>
+            <span id="title">No file</span>
+            </span>
+            <span class="mode statuslineitem">
+                <span class="arrow-right-title statuslineitem"></span>
+            <span id="mode">JavaScript</span>
+            </span>
+            <span class="linenum statuslineitem">
+                <span class="arrow-right-mode statuslineitem"></span>
+            <span id="linenum">1</span>
+            </span>
+            <span class="colnum statuslineitem">
+                <span class="arrow-right-linenum statuslineitem"></span>
+            <span id="colnum">1</span>
+            </span>
+            <span class="arrow-right-colnum statuslineitem"></span>
+        </div>
+		
+		<input style="display:none;" id="openFile" type="file" />
+		<input style="display:none;" id="saveFile" type="file" nwsaveas />
+	</body>
+</html>

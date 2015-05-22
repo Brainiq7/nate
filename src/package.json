@@ -12,6 +12,6 @@
       "min_height": 600,
       "show": false,
       "title": "Nate Editor",
-      "toolbar": true
+      "toolbar": false
   }
 }

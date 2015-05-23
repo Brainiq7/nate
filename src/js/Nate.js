@@ -1,4 +1,3 @@
-var newButton, openButton, saveButton;
 var editor;
 var menu;
 var fileEntry;
@@ -10,8 +9,10 @@ var win = gui.Window.get();
 var clipboard = gui.Clipboard.get();
 
 function handleDocumentChange(title) {
-  var mode = "javascript";
-  var modeName = "JavaScript";
+    fileEntry = title;
+    hasWriteAccess = true;
+  	var mode = "javascript";
+  	var modeName = "JavaScript";
   if (title) {
     title = title.match(/[^/]+$/)[0];
     document.getElementById("title").innerHTML = title;
@@ -89,18 +90,6 @@ function handleNewButton() {
   }
 }
 
-function handleOpenButton() {
-  $("#openFile").trigger("click");
-}
-
-function handleSaveButton() {
-  if (fileEntry && hasWriteAccess) {
-    writeEditorToFile(fileEntry);
-  } else {
-    $("#saveFile").trigger("click");
-  }
-}
-
 function initContextMenu() {
   menu = new gui.Menu();
   menu.append(new gui.MenuItem({
@@ -130,9 +119,22 @@ function initContextMenu() {
     return false;
   });
 }
+
 function openFile() {
     $("#openFile").trigger("click");
 };
+
+function saveFile() {
+  if (fileEntry && hasWriteAccess) {
+    writeEditorToFile(fileEntry);
+  } else {
+    $("#saveFile").trigger("click");
+  }
+}
+
+function saveFileAs() {
+    $("#saveFile").trigger("click");
+}
 
 function newWindow() {
     var x = window.screenX + 10;
@@ -178,7 +180,7 @@ function initMenubar() {
         key: "s",
         modifiers: "ctrl",
         click: function() {
-           
+           saveFile()
         }
     }));
     menuFileMain.append(new gui.MenuItem({
@@ -186,7 +188,7 @@ function initMenubar() {
         key: "s",
         modifiers: "ctrl-shift",
         click: function() {
-           
+           saveFileAs()
         }
     }));
     menuFileMain.append(new gui.MenuItem({ 

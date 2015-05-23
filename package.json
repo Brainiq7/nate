@@ -2,11 +2,24 @@
   "name": "Nate",
   "version": "0.0.1",
   "description": "Code editor from NibbleIT",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Precious Jahlom Agboado",
+  "author": {
+    "name": "NibbleIT",
+    "email": "dev@nibbleitconsult.com"
+  },
+  "contributors": [
+    {
+      "name": "Precious Jahlom Agboado"
+    },
+    {
+      "name": "Jeffrey Godwyll"
+    },
+    {
+      "name": "John Awotwi"
+    }
+  ],
   "license": "MIT",
   "dependencies": {
   },

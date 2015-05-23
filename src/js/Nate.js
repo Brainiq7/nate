@@ -261,7 +261,7 @@ function initMenubar() {
     menuEditMain.append(new gui.MenuItem({
         label: "Select All",
         click: function() {
-            return;
+            editor.execCommand("selectAll")
         }
     }));
 

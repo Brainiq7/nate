@@ -13,25 +13,25 @@ function handleDocumentChange(title) {
     hasWriteAccess = true;
   	var mode = "javascript";
   	var modeName = "JavaScript";
-  if (title) {
-    title = title.match(/[^/]+$/)[0];
-    document.getElementById("title").innerHTML = title;
-    document.title = title;
-    if (title.match(/.json$/)) {
-      mode = {name: "javascript", json: true};
-      modeName = "JavaScript (JSON)";
-    } else if (title.match(/.html$/)) {
-      mode = "htmlmixed";
-      modeName = "HTML";
-    } else if (title.match(/.css$/)) {
-      mode = "css";
-      modeName = "CSS";
+    if (title) {
+        title = title.match(/[^/]+$/)[0];
+        document.getElementById("title").innerHTML = title;
+        document.title = title;
+        if (title.match(/.json$/)) {
+          mode = {name: "javascript", json: true};
+          modeName = "JavaScript (JSON)";
+        } else if (title.match(/.html$/)) {
+          mode = "htmlmixed";
+          modeName = "HTML";
+        } else if (title.match(/.css$/)) {
+          mode = "css";
+          modeName = "CSS";
+        }
+      } else {
+        document.getElementById("title").innerHTML = "[no document loaded]";
     }
-  } else {
-    document.getElementById("title").innerHTML = "[no document loaded]";
-  }
-  editor.setOption("mode", mode);
-  document.getElementById("mode").innerHTML = modeName;
+    editor.setOption("mode", mode);
+    document.getElementById("mode").innerHTML = modeName;
 }
 
 function newFile() {

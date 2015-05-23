@@ -268,8 +268,9 @@ function initMenubar() {
     //  Submenus for View Menu
     menuViewMain.append(new gui.MenuItem({
         label: "Toggle Full Screen",
+        key: 'f11',
         click: function() {
-            return;
+            win.toggleFullscreen()
         }
     }));
     menuViewMain.append(new gui.MenuItem({ 

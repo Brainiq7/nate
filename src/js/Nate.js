@@ -221,14 +221,18 @@ function initMenubar() {
     //  Submenus for Edit Menu
     menuEditMain.append(new gui.MenuItem({
         label: "Undo",
+        key: "z",
+        modifiers: "ctrl",
         click: function() {
-            return;
+            editor.undo()
         }
     }));
     menuEditMain.append(new gui.MenuItem({
         label: "Redo",
+        key: "y",
+        modifiers: "ctrl",
         click: function() {
-            return;
+            editor.redo()
         }
     }));
     menuEditMain.append(new gui.MenuItem({ 
